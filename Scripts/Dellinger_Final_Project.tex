@@ -1,0 +1,839 @@
+\documentclass[]{tufte-handout}
+
+% ams
+\usepackage{amssymb,amsmath}
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \makeatletter
+  \@ifpackageloaded{fontspec}{}{\usepackage{fontspec}}
+  \makeatother
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \makeatletter
+  \@ifpackageloaded{soul}{
+     \renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+     \renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
+   }{}
+  \makeatother
+
+\fi
+
+% graphix
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+% booktabs
+\usepackage{booktabs}
+
+% url
+\usepackage{url}
+
+% hyperref
+\usepackage{hyperref}
+
+% units.
+\usepackage{units}
+
+
+\setcounter{secnumdepth}{-1}
+
+% citations
+
+
+% pandoc syntax highlighting
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+% table with pandoc
+
+% multiplecol
+\usepackage{multicol}
+
+% strikeout
+\usepackage[normalem]{ulem}
+
+% morefloats
+\usepackage{morefloats}
+
+
+% tightlist macro required by pandoc >= 1.14
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% title / author / date
+\title{USING OPEN SOURCE DATA TO VISUALIZE BIOLOGICAL, CHEMICAL, AND
+PHYSICAL OCEANOGRAPHIC PROCESSES}
+\author{Robert Dellinger}
+\date{5/5/2022}
+
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{warning=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{fig.algin=}\StringTok{"center"}\NormalTok{, }\AttributeTok{fig.path =} \StringTok{\textquotesingle{}../output/\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"ropensci/rerddap"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Skipping install of 'rerddap' from a github remote, the SHA1 (0723cafc) has not changed since last install.
+##   Use `force = TRUE` to force installation
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(oce)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: gsw
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ocedata)}
+\FunctionTok{library}\NormalTok{(ncdf4)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.6     v purrr   0.3.4
+## v tibble  3.1.7     v dplyr   1.0.9
+## v tidyr   1.2.0     v stringr 1.4.0
+## v readr   2.1.2     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lubridate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidync)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(marmap)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Registered S3 methods overwritten by 'adehabitatMA':
+##   method                       from
+##   print.SpatialPixelsDataFrame sp  
+##   print.SpatialPixels          sp
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'marmap'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:oce':
+## 
+##     plotProfile
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:grDevices':
+## 
+##     as.raster
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(ggmap)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Google's Terms of Service: https://cloud.google.com/maps-platform/terms/.
+\end{verbatim}
+
+\begin{verbatim}
+## Please cite ggmap if you use it! See citation("ggmap") for details.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gganimate)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(plotly)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'plotly'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggmap':
+## 
+##     wind
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     last_plot
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     filter
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:graphics':
+## 
+##     layout
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(sf)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linking to GEOS 3.9.1, GDAL 3.4.0, PROJ 8.1.1; sf_use_s2() is TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(spData)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## To access larger datasets in this package, install the spDataLarge
+## package with: `install.packages('spDataLarge',
+## repos='https://nowosad.github.io/drat/', type='source')`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rerddap)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'hoardr':
+##   method           from
+##   print.cache_info httr
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(raster)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: sp
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'raster'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:plotly':
+## 
+##     select
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(mapdata)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: maps
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'maps'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     map
+\end{verbatim}
+
+\hypertarget{mapping-with-the-oce-package}{%
+\section{Mapping with the OCE
+package}\label{mapping-with-the-oce-package}}
+
+\hypertarget{read-in-datasets}{%
+\subsection{Read in Datasets}\label{read-in-datasets}}
+
+The OCE package is a package written by Kelley and Richards (2018) and
+is focused on oceanographic mapping and plotting that meets publication
+quality standards. Here, we use the mapPlot() function to create maps
+using coastline data and visualize oceanographic processes.
+
+\hypertarget{downloading-data}{%
+\subsection{Downloading Data}\label{downloading-data}}
+
+First we will read in data from the oce package using the data()
+function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Coastline }\OtherTok{\textless{}{-}} \FunctionTok{data}\NormalTok{(}\StringTok{"coastlineWorld"}\NormalTok{) }\CommentTok{\#coastline data}
+\NormalTok{Coastline\_Medium }\OtherTok{\textless{}{-}} \FunctionTok{data}\NormalTok{(}\StringTok{"coastlineWorldMedium"}\NormalTok{) }\CommentTok{\#medium{-}scale coastline data}
+\NormalTok{Coastline\_Fine }\OtherTok{\textless{}{-}} \FunctionTok{data}\NormalTok{(}\StringTok{"coastlineWorldFine"}\NormalTok{) }\CommentTok{\#fine{-}scale{-}scale coastline data}
+\NormalTok{Bathymetry }\OtherTok{\textless{}{-}} \FunctionTok{as.topo}\NormalTok{(}\FunctionTok{getNOAA.bathy}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{180}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{90}\NormalTok{)) }\CommentTok{\#coordinates for bathymetry data from NOAA (Northern Hemisphere)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Querying NOAA database ...
+\end{verbatim}
+
+\begin{verbatim}
+## This may take seconds to minutes, depending on grid size
+\end{verbatim}
+
+\begin{verbatim}
+## Building bathy matrix ...
+\end{verbatim}
+
+\hypertarget{creating-a-map}{%
+\section{Creating a Map}\label{creating-a-map}}
+
+Using the map from the oce package we will create a simple map function
+that can be rerun
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# setting the map limits}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\CommentTok{\# margins}
+\NormalTok{lonlim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{126}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{116}\NormalTok{) }\CommentTok{\# longitude}
+\NormalTok{latlim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{32}\NormalTok{,}\DecValTok{40}\NormalTok{) }\CommentTok{\# latitude}
+
+\NormalTok{coastline.map }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{() \{ }
+  \FunctionTok{mapPlot}\NormalTok{(coastlineWorldFine, }\CommentTok{\#using fine{-}scale data}
+        \AttributeTok{projection=}\StringTok{"+proj=mill"}\NormalTok{, }\CommentTok{\#setting the projection type}
+        \AttributeTok{col=}\StringTok{"grey"}\NormalTok{, }\CommentTok{\#setting colors,}
+        \AttributeTok{longitudelim=}\NormalTok{lonlim, }
+        \AttributeTok{latitudelim=}\NormalTok{latlim,}
+        \AttributeTok{lonlabels=}\ConstantTok{TRUE}\NormalTok{,}
+        \AttributeTok{latlabels=}\ConstantTok{TRUE}\NormalTok{,}
+        \AttributeTok{geographical=}\DecValTok{4}\NormalTok{,}
+        \AttributeTok{clip=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+
+\FunctionTok{coastline.map}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics{../output/Creating a Map Function Using OCE-1} \caption[Map of California]{Map of California}\label{fig:Creating a Map Function Using OCE}
+\end{figure}
+
+\hypertarget{creating-a-map-with-bathymetry}{%
+\section{Creating a Map with
+Bathymetry}\label{creating-a-map-with-bathymetry}}
+
+We will now create a map that mimics the depth of the ocean floor using
+our previous map function. The provided color palettes in the package
+can be used to visualize oceanographic phenomena such as bathymetry.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# setting the map limits}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\CommentTok{\# margins}
+\NormalTok{lonlim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{125}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{116}\NormalTok{) }\CommentTok{\# longitude}
+\NormalTok{latlim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\FloatTok{33.5}\NormalTok{,}\FloatTok{39.5}\NormalTok{) }\CommentTok{\# latitude}
+
+\CommentTok{\#Creating a Map with Bathymetry}
+\CommentTok{\#Place Map}
+\FunctionTok{coastline.map}\NormalTok{()}
+\CommentTok{\#Overlaying Bathymetry Data}
+\FunctionTok{mapImage}\NormalTok{(Bathymetry, }\AttributeTok{col=}\NormalTok{oceColorsGebco, }\AttributeTok{breaks=}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{6000}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{))}
+\FunctionTok{mapImage}\NormalTok{(Bathymetry, }\AttributeTok{col=}\NormalTok{oceColorsGebco, }\AttributeTok{breaks=}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{6000}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{500}\NormalTok{), }\AttributeTok{filledContour =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\#Adding in Coastline}
+\FunctionTok{mapPolygon}\NormalTok{(coastlineWorldFine, }\AttributeTok{col =} \StringTok{"darkolivegreen3"}\NormalTok{, }\AttributeTok{border =} \StringTok{"black"}\NormalTok{) }
+\CommentTok{\#Adding in Grid}
+\FunctionTok{mapGrid}\NormalTok{(}\AttributeTok{dlongitude=}\DecValTok{1}\NormalTok{, }\AttributeTok{dlatitude=}\DecValTok{1}\NormalTok{, }\AttributeTok{col=}\StringTok{"black"}\NormalTok{, }\AttributeTok{lty=}\DecValTok{3}\NormalTok{) }
+
+\CommentTok{\#Setting points on a map with names and the respective locations}
+\NormalTok{sites }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Leo Carrillo State Beach }\SpecialCharTok{\textbackslash{}n}\StringTok{ Malibu, CA"}\NormalTok{, }\StringTok{"Bodega Marine Lab }\SpecialCharTok{\textbackslash{}n}\StringTok{ Bodega Bay, CA"}\NormalTok{), }
+                      \AttributeTok{lon =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{118.9279}\NormalTok{, }\SpecialCharTok{{-}}\FloatTok{123.0481}\NormalTok{), }\CommentTok{\#locations and their respective longitude and latitudes}
+                      \AttributeTok{lat =} \FunctionTok{c}\NormalTok{(}\FloatTok{34.0622}\NormalTok{, }\FloatTok{38.3332}\NormalTok{)) }
+\CommentTok{\#Placing points on the map}
+\FunctionTok{mapPoints}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ sites}\SpecialCharTok{$}\NormalTok{lon, }\CommentTok{\#placing points on map using longitude}
+          \AttributeTok{latitude =}\NormalTok{ sites}\SpecialCharTok{$}\NormalTok{lat, }\CommentTok{\#placing points on map using latitude}
+          \AttributeTok{pch =} \DecValTok{20}\NormalTok{, }
+          \AttributeTok{cex =} \FloatTok{1.75}\NormalTok{)  }\CommentTok{\#point size}
+\CommentTok{\#Overlaying text}
+\FunctionTok{mapText}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ sites}\SpecialCharTok{$}\NormalTok{lon}\FloatTok{+1.5}\NormalTok{, }\CommentTok{\#map text location long and lat}
+        \AttributeTok{latitude =}\NormalTok{ sites}\SpecialCharTok{$}\NormalTok{lat}\FloatTok{+.75}\NormalTok{, }
+        \AttributeTok{labels =}\NormalTok{ sites}\SpecialCharTok{$}\NormalTok{name,}
+        \AttributeTok{cex =} \FloatTok{1.2}\NormalTok{, }\CommentTok{\#font size}
+        \AttributeTok{col=}\StringTok{"black"}\NormalTok{) }\CommentTok{\# changing font family}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics{../output/unnamed-chunk-1-1} \caption[Map of California with Bathymetry]{Map of California with Bathymetry}\label{fig:unnamed-chunk-1}
+\end{figure}
+
+\hypertarget{creating-a-map-with-overlayed-sst-data}{%
+\section{Creating a Map with Overlayed SST
+Data}\label{creating-a-map-with-overlayed-sst-data}}
+
+We will now create a map that mimics that shows us the sea surface
+temperature of the ocean and use the provided temeprature color palette
+to visualize differences in ocean temperature. NOAA and NASA provide
+open source data for marine biology and oceanography data that can be
+used for creating visuals. For this portion we will use data downloaded
+from the Group for High Resolution Sea Surface Temperature (GHRSST)
+which has entire data sets of regional and global data linked here
+{[}\url{https://www.ghrsst.org/}{]}. The dataset is provided in a netcdf
+format so we will have to first read in the data using the nc\_open
+function from the netcdf package (Pierce 2017) prior to graphing.
+
+We will download sea surface temperature (SST) analysis data provided by
+NOAA which provides a combination of daily satellite and in situ
+temperature temperature measurements on a global level. We will use data
+from August 1, 2018, the day of the hottest observed SST by Scripps
+Institution of Oceanography since the previous record set in 1931.
+
+\hypertarget{reading-in-open-source-sst-data-from-noaa-and-nasa}{%
+\subsection{Reading in Open Source SST Data from NOAA and
+NASA}\label{reading-in-open-source-sst-data-from-noaa-and-nasa}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Opening downloaded data from NOAA }
+\NormalTok{sst.data }\OtherTok{\textless{}{-}} \FunctionTok{nc\_open}\NormalTok{(}\StringTok{"/Users/robertdellinger/Documents/Independent\_Project\_Dellinger/Data/SST\_08\_01\_2018.nc"}\NormalTok{)}
+
+\CommentTok{\# extract the longitude variable}
+\NormalTok{sst.lon }\OtherTok{=} \FunctionTok{ncvar\_get}\NormalTok{(sst.data, }\StringTok{"lon"}\NormalTok{)}
+\CommentTok{\# extract the latitude variable}
+\NormalTok{sst.lat }\OtherTok{=} \FunctionTok{ncvar\_get}\NormalTok{(sst.data, }\StringTok{"lat"}\NormalTok{)}
+\CommentTok{\# extract sst variable}
+\NormalTok{sst }\OtherTok{=} \FunctionTok{ncvar\_get}\NormalTok{(sst.data, }\StringTok{"analysed\_sst"}\NormalTok{)}
+\CommentTok{\# extract time }
+
+\DocumentationTok{\#\# Kelvin to Degree celsius and calibrate}
+\NormalTok{sst }\OtherTok{=}\NormalTok{ sst}\FloatTok{{-}273.149993896484}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{hottest-observed-sst-for-the-southern-california-region}{%
+\section{Hottest Observed SST for the Southern California
+Region}\label{hottest-observed-sst-for-the-southern-california-region}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# setting the map limits}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\CommentTok{\# margins}
+\NormalTok{lonlim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{122.25}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{116.25}\NormalTok{) }\CommentTok{\# longitude}
+\NormalTok{latlim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\FloatTok{32.25}\NormalTok{,}\FloatTok{35.25}\NormalTok{) }\CommentTok{\# latitude}
+\NormalTok{templim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{26}\NormalTok{) }\CommentTok{\#temperature limits in celsisus}
+
+\DocumentationTok{\#\# draw palette (must be done before plotting)}
+\FunctionTok{drawPalette}\NormalTok{(}\AttributeTok{zlim =}\NormalTok{ templim, }
+            \AttributeTok{zlab =} \StringTok{"Temperature (°C)"}\NormalTok{,}
+            \AttributeTok{col=}\NormalTok{oce.colorsJet, }\CommentTok{\#using the oce package temperature colors}
+            \AttributeTok{at =} \FunctionTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{1}\NormalTok{), }
+            \AttributeTok{pos =} \DecValTok{1}\NormalTok{)}
+
+\CommentTok{\#adding in sst to overlay the map function}
+\FunctionTok{coastline.map}\NormalTok{()}
+\FunctionTok{mapImage}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ sst.lon, }\AttributeTok{latitude =}\NormalTok{ sst.lat, }\AttributeTok{z =}\NormalTok{ sst, }\AttributeTok{zlim =}\NormalTok{ templim, }\AttributeTok{col =} \FunctionTok{oceColorsJet}\NormalTok{(}\DecValTok{120}\NormalTok{))}
+\FunctionTok{mapImage}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ sst.lon, }\AttributeTok{latitude =}\NormalTok{ sst.lat, }\AttributeTok{z =}\NormalTok{ sst, }\AttributeTok{zlim =}\NormalTok{ templim, }\AttributeTok{col =} \FunctionTok{oceColorsJet}\NormalTok{(}\DecValTok{120}\NormalTok{), }\AttributeTok{filledContour =} \ConstantTok{TRUE}\NormalTok{)  }\CommentTok{\#overlay sst \& contour}
+\FunctionTok{mapContour}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ sst.lon, }\AttributeTok{latitude =}\NormalTok{ sst.lat, }\AttributeTok{z =}\NormalTok{ sst, }\AttributeTok{levels =} \FunctionTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{1}\NormalTok{),}
+            \AttributeTok{col =} \StringTok{"black"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{mapPolygon}\NormalTok{(coastlineWorldFine, }\AttributeTok{col=}\StringTok{"darkolivegreen3"}\NormalTok{) }\CommentTok{\# overlay green topography}
+\FunctionTok{mapGrid}\NormalTok{(}\AttributeTok{dlongitude=}\DecValTok{1}\NormalTok{, }\AttributeTok{dlatitude=}\DecValTok{1}\NormalTok{, }\AttributeTok{col=}\StringTok{"black"}\NormalTok{, }\AttributeTok{lty=}\DecValTok{3}\NormalTok{) }\DocumentationTok{\#\# adding a map grid}
+
+\CommentTok{\#Setting points on a map with names and the respective locations}
+\NormalTok{site }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Leo Carrillo State Beach }\SpecialCharTok{\textbackslash{}n}\StringTok{ Malibu, CA"}\NormalTok{), }
+                      \AttributeTok{lon =} \SpecialCharTok{{-}}\FloatTok{118.9279}\NormalTok{, }\CommentTok{\#locations and their respective longitude and latitudes}
+                      \AttributeTok{lat =} \FloatTok{34.0622}\NormalTok{)}
+\CommentTok{\#Placing points on the map}
+\FunctionTok{mapPoints}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{lon, }\CommentTok{\#placing points on map using longitude}
+          \AttributeTok{latitude =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{lat, }\CommentTok{\#placing points on map using latitude}
+          \AttributeTok{pch =} \DecValTok{20}\NormalTok{, }
+          \AttributeTok{cex =} \FloatTok{1.75}\NormalTok{)  }\CommentTok{\#point size}
+\CommentTok{\#Overlaying text}
+\FunctionTok{mapText}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{lon}\FloatTok{+1.5}\NormalTok{, }\CommentTok{\#map text location long and lat}
+        \AttributeTok{latitude =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{lat}\FloatTok{+.75}\NormalTok{, }
+        \AttributeTok{labels =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{name,}
+        \AttributeTok{cex =} \FloatTok{1.2}\NormalTok{, }\CommentTok{\#font size}
+        \AttributeTok{col=}\StringTok{"black"}\NormalTok{) }\CommentTok{\# changing font family}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics{../output/unnamed-chunk-2-1} \caption[SST Map for Souththern California]{SST Map for Souththern California}\label{fig:unnamed-chunk-2}
+\end{figure}
+
+\hypertarget{hottest-observed-sst-for-the-northern-california-region}{%
+\section{Hottest Observed SST for the Northern California
+Region}\label{hottest-observed-sst-for-the-northern-california-region}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# setting the map limits}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\CommentTok{\# margins}
+\NormalTok{lonlim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{126.25}\NormalTok{,}\SpecialCharTok{{-}}\FloatTok{120.25}\NormalTok{) }\CommentTok{\# longitude}
+\NormalTok{latlim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\FloatTok{37.25}\NormalTok{,}\FloatTok{40.25}\NormalTok{) }\CommentTok{\# latitude }
+\NormalTok{templim }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{26}\NormalTok{) }\CommentTok{\#temperature limits in celsisus}
+
+\DocumentationTok{\#\# draw palette (must be done before plotting)}
+\FunctionTok{drawPalette}\NormalTok{(}\AttributeTok{zlim =}\NormalTok{ templim, }
+            \AttributeTok{zlab =} \StringTok{"Temperature (°C)"}\NormalTok{,}
+            \AttributeTok{col=}\NormalTok{oce.colorsJet, }\CommentTok{\#using the oce package temperature colors}
+            \AttributeTok{at =} \FunctionTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{1}\NormalTok{), }
+            \AttributeTok{pos =} \DecValTok{1}\NormalTok{)}
+
+\CommentTok{\#adding in sst to overlay the map function}
+\FunctionTok{coastline.map}\NormalTok{()}
+\FunctionTok{mapImage}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ sst.lon, }\AttributeTok{latitude =}\NormalTok{ sst.lat, }\AttributeTok{z =}\NormalTok{ sst, }\AttributeTok{zlim =}\NormalTok{ templim, }\AttributeTok{col =} \FunctionTok{oceColorsJet}\NormalTok{(}\DecValTok{120}\NormalTok{))}
+\FunctionTok{mapImage}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ sst.lon, }\AttributeTok{latitude =}\NormalTok{ sst.lat, }\AttributeTok{z =}\NormalTok{ sst, }\AttributeTok{zlim =}\NormalTok{ templim, }\AttributeTok{col =} \FunctionTok{oceColorsJet}\NormalTok{(}\DecValTok{120}\NormalTok{), }\AttributeTok{filledContour =} \ConstantTok{TRUE}\NormalTok{)  }\CommentTok{\#overlay sst \& contour}
+\FunctionTok{mapContour}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ sst.lon, }\AttributeTok{latitude =}\NormalTok{ sst.lat, }\AttributeTok{z =}\NormalTok{ sst, }\AttributeTok{levels =} \FunctionTok{seq}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{26}\NormalTok{,}\DecValTok{1}\NormalTok{),}
+            \AttributeTok{col =} \StringTok{"black"}\NormalTok{, }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{)}
+\FunctionTok{mapPolygon}\NormalTok{(coastlineWorldFine, }\AttributeTok{col=}\StringTok{"darkolivegreen3"}\NormalTok{) }\CommentTok{\# overlay green topography}
+\FunctionTok{mapGrid}\NormalTok{(}\AttributeTok{dlongitude=}\DecValTok{1}\NormalTok{, }\AttributeTok{dlatitude=}\DecValTok{1}\NormalTok{, }\AttributeTok{col=}\StringTok{"black"}\NormalTok{, }\AttributeTok{lty=}\DecValTok{3}\NormalTok{) }\DocumentationTok{\#\# adding a map grid}
+
+
+\CommentTok{\#Setting points on a map with names and the respective locations}
+\NormalTok{site }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Bodega Marine Lab }\SpecialCharTok{\textbackslash{}n}\StringTok{ Bodega Bay, CA"}\NormalTok{), }
+                      \AttributeTok{lon =} \SpecialCharTok{{-}}\FloatTok{123.0481}\NormalTok{, }\CommentTok{\#locations and their respective longitude and latitudes}
+                      \AttributeTok{lat =} \FloatTok{38.3332}\NormalTok{) }
+\CommentTok{\#Placing points on the map}
+\FunctionTok{mapPoints}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{lon, }\CommentTok{\#placing points on map using longitude}
+          \AttributeTok{latitude =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{lat, }\CommentTok{\#placing points on map using latitude}
+          \AttributeTok{pch =} \DecValTok{20}\NormalTok{, }
+          \AttributeTok{cex =} \FloatTok{1.75}\NormalTok{)  }\CommentTok{\#point size}
+\CommentTok{\#Overlaying text}
+\FunctionTok{mapText}\NormalTok{(}\AttributeTok{longitude =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{lon}\FloatTok{+1.5}\NormalTok{, }\CommentTok{\#map text location long and lat}
+        \AttributeTok{latitude =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{lat}\FloatTok{+.75}\NormalTok{, }
+        \AttributeTok{labels =}\NormalTok{ site}\SpecialCharTok{$}\NormalTok{name,}
+        \AttributeTok{cex =} \FloatTok{1.2}\NormalTok{, }\CommentTok{\#font size}
+        \AttributeTok{col=}\StringTok{"black"}\NormalTok{) }\CommentTok{\# changing font family}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics{../output/unnamed-chunk-3-1} \caption[SST Map for Northern California]{SST Map for Northern California}\label{fig:unnamed-chunk-3}
+\end{figure}
+
+\hypertarget{visualizing-time-series-data}{%
+\section{Visualizing Time Series
+Data}\label{visualizing-time-series-data}}
+
+Data was downloaded from NOAA Environmental Research Division Data
+Access Program (EDRAPP) at a Southern California Coastal Ocean
+Observation Station (SCCOOS) linked here
+{[}\url{https://sccoos.org/}{]}. Data was downloaded from the station at
+the Santa Monica Pier. This data provides us with the SST measurements
+taken at frequent intervals for the nearshore coastal ocean of the Los
+Angeles region.
+
+Below we read in the packages using the nc\_open() functionand extract
+time and SST variables from the data set
+
+\hypertarget{load-in-data}{%
+\subsection{Load in Data}\label{load-in-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sccoss.data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"/Users/robertdellinger/Documents/Independent\_Project\_Dellinger/Data/SCCOSS\_SST\_LA\_01012012\_01012022.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 796962 Columns: 2
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (2): time, temperature
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(sccoss.data) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"datetime"}\NormalTok{,}\StringTok{"SST"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-wrangling}{%
+\section{Data Wrangling}\label{data-wrangling}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#clean the data}
+\NormalTok{sccoss.data.clean  }\OtherTok{\textless{}{-}}\NormalTok{ sccoss.data[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,] }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\#remove first column}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{datetime =} \FunctionTok{str\_remove}\NormalTok{(datetime, }\StringTok{"Z"}\NormalTok{), }\CommentTok{\#remove z from string}
+         \AttributeTok{date =} \FunctionTok{as.Date}\NormalTok{(}\FunctionTok{ymd}\NormalTok{(}\FunctionTok{str\_split\_fixed}\NormalTok{(datetime, }\StringTok{"T"}\NormalTok{, }\AttributeTok{n=}\ConstantTok{Inf}\NormalTok{)[,}\DecValTok{1}\NormalTok{])), }\CommentTok{\#split string into date}
+         \AttributeTok{time=} \FunctionTok{str\_split\_fixed}\NormalTok{(datetime, }\StringTok{"T"}\NormalTok{, }\AttributeTok{n=}\ConstantTok{Inf}\NormalTok{)[,}\DecValTok{2}\NormalTok{], }\CommentTok{\#split string into time}
+         \AttributeTok{SST =} \FunctionTok{as.numeric}\NormalTok{(SST)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\#change sst to a numeric value}
+  \FunctionTok{filter}\NormalTok{(SST}\SpecialCharTok{\textgreater{}}\DecValTok{10}\NormalTok{,}
+\NormalTok{         SST}\SpecialCharTok{\textless{}}\DecValTok{30}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\StringTok{"date"}\NormalTok{, }\StringTok{"SST"}\NormalTok{) }
+
+\NormalTok{sccoss.summary }\OtherTok{\textless{}{-}}\NormalTok{ sccoss.data.clean }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(date)}\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# group date}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{SST.mean =} \FunctionTok{mean}\NormalTok{(SST, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{), }\CommentTok{\#calculate mean}
+            \AttributeTok{SST.sd =} \FunctionTok{sd}\NormalTok{(SST, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{SST.min =} \FunctionTok{min}\NormalTok{(SST, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{),}
+            \AttributeTok{SST.max =} \FunctionTok{max}\NormalTok{(SST, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+
+\NormalTok{sccoss.dataset }\OtherTok{\textless{}{-}} \FunctionTok{full\_join}\NormalTok{(sccoss.data.clean, sccoss.summary, }\AttributeTok{by=}\StringTok{"date"}\NormalTok{) }\CommentTok{\#join data sets}
+
+\NormalTok{sccoss.timeseries }\OtherTok{\textless{}{-}}\NormalTok{ sccoss.dataset }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textless{}} \FunctionTok{ymd}\NormalTok{(}\StringTok{"2022{-}01{-}01"}\NormalTok{), }\CommentTok{\#filter years}
+\NormalTok{         date }\SpecialCharTok{\textgreater{}} \FunctionTok{ymd}\NormalTok{(}\StringTok{"2019{-}01{-}01"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\#Plotting Time Series Temperature Data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# make the plot and add labels}
+\NormalTok{sst.plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(sccoss.timeseries, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{date, }\AttributeTok{y=}\NormalTok{SST.mean)) }\SpecialCharTok{+} \CommentTok{\#date by mean sst}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{date, }\AttributeTok{y=}\NormalTok{SST.mean), }\AttributeTok{color=}\StringTok{"darkcyan"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{span=}\FloatTok{0.25}\NormalTok{, }\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{color=}\StringTok{"darkcyan"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_ribbon}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{SST.min, }\AttributeTok{ymax=}\NormalTok{SST.max), }\AttributeTok{fill=}\StringTok{"darkcyan"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.1}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Sea Surface Temperature (°C)"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\#add labels}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Date"}\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Mean Sea Surface Temperature in Los Angeles, CA"}\NormalTok{, }\AttributeTok{subtitle =} \StringTok{"Maximum, Minimum, \& Mean SST Between 2019 \& 2022 }
+\StringTok{(Data: Southern California Coastal Ocean Observation Station, Santa Monica Pier)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{9}\NormalTok{) }\CommentTok{\#}
+
+\NormalTok{sst.plot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+\end{verbatim}
+
+\begin{figure}
+\includegraphics{../output/unnamed-chunk-4-1} \caption[Sea Surface Temperature Time Series for Los Angeles]{Sea Surface Temperature Time Series for Los Angeles}\label{fig:unnamed-chunk-4}
+\end{figure}
+
+\hypertarget{plotting-using-noaa-erdapp-data}{%
+\section{Plotting Using NOAA ERDAPP
+Data}\label{plotting-using-noaa-erdapp-data}}
+
+For this portion we will use NOAA servers to download monthly mean
+temperatures and visualize data using a boxplot. Data can either be
+downloaded by using the rerddap package or the NOAA online repository.
+We will clean the data by selecting for the year 2021 and then the
+longitudes and latitudes of the Southern California Region. Then, we
+will average SST per month and create an animated plot to visualize
+changes between months.
+
+\href{https://psl.noaa.gov/repository/entry/show?entryid=cac1c2a6-a864-4409-bb77-1fdead8eeb6e}{Data
+Linked Here}
+
+Available ERDDAP data can also be pulled into R using the servers()
+function
+
+\hypertarget{data-wrangling-1}{%
+\subsection{Data Wrangling}\label{data-wrangling-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sst.file }\OtherTok{\textless{}{-}} \FunctionTok{tidync}\NormalTok{(}\StringTok{"/Users/robertdellinger/Documents/Independent\_Project\_Dellinger/Data/sst.mnmean.nc"}\NormalTok{) }
+\NormalTok{sst.tibble }\OtherTok{\textless{}{-}} \FunctionTok{hyper\_tibble}\NormalTok{(sst.file,  }\AttributeTok{na.rm =} \ConstantTok{FALSE}\NormalTok{) }\CommentTok{\#turnning nc into tibble}
+
+\NormalTok{sst.data }\OtherTok{\textless{}{-}}\NormalTok{ sst.tibble  }\SpecialCharTok{\%\textgreater{}\%}  
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date=}\FunctionTok{as.Date}\NormalTok{(time, }\AttributeTok{origin=}\StringTok{"1800{-}1{-}1 00:00:00"}\NormalTok{),}
+         \AttributeTok{day =} \FunctionTok{day}\NormalTok{(date),  }\CommentTok{\# save dates as intergers }
+         \AttributeTok{month =} \FunctionTok{month}\NormalTok{(date) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.integer}\NormalTok{(),}
+         \AttributeTok{year =} \FunctionTok{year}\NormalTok{(date) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.integer}\NormalTok{(),}
+         \AttributeTok{sst=}\FunctionTok{as.numeric}\NormalTok{(sst)) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\#converting dates }
+  \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}=} \FunctionTok{dmy}\NormalTok{(}\DecValTok{010121}\NormalTok{), date }\SpecialCharTok{\textless{}=} \FunctionTok{dmy}\NormalTok{(}\DecValTok{010122}\NormalTok{),}
+\NormalTok{         lat }\SpecialCharTok{\textgreater{}} \DecValTok{30}\NormalTok{, lat }\SpecialCharTok{\textless{}} \DecValTok{35}\NormalTok{, }\CommentTok{\#lat limits}
+\NormalTok{         lon }\SpecialCharTok{\textgreater{}} \DecValTok{290}\NormalTok{, lon }\SpecialCharTok{\textless{}} \DecValTok{310}\NormalTok{,}
+\NormalTok{         year }\SpecialCharTok{==}\DecValTok{2021}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\#lon limits}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(date, month, lon, lat, sst)}
+  
+\NormalTok{sst.data }\OtherTok{=} \FunctionTok{as.data.frame}\NormalTok{(sst.data) }\CommentTok{\#convert to data frame}
+
+\DocumentationTok{\#\# group sst based on longitude, latitude and month}
+\NormalTok{sst.month }\OtherTok{=}\NormalTok{ sst.data }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(lon,lat,month) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# selected for lat, long, and month}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{sst =} \FunctionTok{mean}\NormalTok{(sst, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'lon', 'lat'. You can override using the
+## `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# ungroup grouped data frame}
+\NormalTok{sst.month }\OtherTok{=}\NormalTok{ sst.data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{ungroup}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{creating-an-animated-temperature-plot-for-the-southern-california-region}{%
+\section{Creating an Animated Temperature Plot for the Southern
+California
+Region}\label{creating-an-animated-temperature-plot-for-the-southern-california-region}}
+
+Here we use gganimate and ggplot2 to create a animated boxplot using
+mean temperature data for the Southern California Region.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{animatedplot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{sst.month, }\CommentTok{\#ggplot sst monthly data}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ month, }\AttributeTok{y =}\NormalTok{ sst, }\AttributeTok{fill =} \FunctionTok{as.factor}\NormalTok{(month)))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+} \CommentTok{\#create boxplot}
+  \FunctionTok{scale\_fill\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Paired"}\NormalTok{)}\SpecialCharTok{+}
+\NormalTok{  cowplot}\SpecialCharTok{::}\FunctionTok{theme\_cowplot}\NormalTok{()}\SpecialCharTok{+} 
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{12}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Sea Surface Temperature (°C)"}\NormalTok{)}\SpecialCharTok{+}  \CommentTok{\#add labels}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Month"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"\{closest\_state\}"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{transition\_states}\NormalTok{(month, }\AttributeTok{transition\_length =} \DecValTok{20}\NormalTok{, }\CommentTok{\#transition time and month}
+                    \AttributeTok{state\_length =} \DecValTok{2}\NormalTok{, }\AttributeTok{wrap =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+} \CommentTok{\#transition wrap}
+  \FunctionTok{ease\_aes}\NormalTok{(}\StringTok{\textquotesingle{}linear\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{shadow\_mark}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{"/Users/robertdellinger/Documents/Independent\_Project\_Dellinger/Output/Animated\_Boxplot\_Final.gif"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics{/Users/robertdellinger/Documents/Independent_Project_Dellinger/Output/Animated_Boxplot_Final} \caption[Monthly Variation of Temperature in Southern California Boxplot]{Monthly Variation of Temperature in Southern California Boxplot}\label{fig:unnamed-chunk-5}
+\end{figure}
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+Grolemund, G., \& Wickham, H. (2011). Dates and times made easy with
+lubridate. Journal of Statistical Software, 40(3), 1--25. Retrieved from
+\url{http://www.jstatsoft.org/v40/i03/}
+
+Kelley, Dan. 2015. Ocedata: Oceanographic Datasets for Oce.
+\url{https://CRAN.R-project.org/package=ocedata}.
+
+Kelley, Dan, and Clark Richards. 2018. Oce: Analysis of Oceanographic
+Data. \url{https://CRAN.R-project.org/package=oce}.
+
+R Core Team. 2018. R: A Language and Environment for Statistical
+Computing. Vienna, Austria: R Foundation for Statistical Computing.
+\url{https://www.R-project.org/}.
+
+Richard W. Reynolds, Viva F. Banzon, and NOAA CDR Program (2008): NOAA
+Optimum Interpolation 1/4 Degree Daily Sea Surface Temperature (OISST)
+Analysis, Version 2. {[}indicate subset used{]}. NOAA National Centers
+for Environmental Information. \url{http://doi.org/doi:10.7289/V5SQ8XB5}
+
+Pedersen, T. L., \& Robinson, D. (2017). Gganimate: A grammar of
+animated graphics. Retrieved from
+\url{http://github.com/thomasp85/gganimate}
+
+Wickham, H. (2016). Ggplot2: Elegant graphics for data analysis.
+Springer-Verlag New York. Retrieved from \url{http://ggplot2.org}
+
+Pierce, David. 2017. Ncdf4: Interface to Unidata netCDF (Version 4 or
+Earlier) Format Data Files.
+\url{https://CRAN.R-project.org/package=ncdf4}.
+
+
+
+\end{document}
